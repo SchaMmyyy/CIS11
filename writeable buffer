@@ -1,0 +1,31 @@
+
+.386
+.model flat,stdcall
+option casemap:none
+
+include     \masm32\include\windows.inc
+include     \masm32\include\kernel32.inc
+include     \masm32\include\masm32.inc
+includelib  \masm32\lib\kernel32.lib
+includelib  \masm32\lib\masm32.lib
+
+
+.data
+msg1 db 'Please type your name',13,10,0
+msg2 db 'Nice to see you ',0
+msg3 db ' ', 13,10,0
+
+.data?
+buffer db 100 dup(?)
+.code
+
+start:
+invoke StdOut,ADDR msg1
+invoke StdIn,ADDR buffer,100 ; receive text input
+invoke StdOut,ADDR msg2
+
+invoke StdOut,ADDR buffer
+invoke StdOut,ADDR msg3
+invoke ExitProcess,0
+END start
+
