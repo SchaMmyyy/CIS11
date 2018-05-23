@@ -15,8 +15,8 @@ NumberOfNumbers =0 ; Number of random numbers to be generated and shown
 ;RangeOfNumbers = 6   ; Range of the random numbers (0..RangeOfNumbers-1)
 
 .DATA 
-msg1 db 'PICK A CHARACTER: ',13,10,0
-msg2 db 'YOU PICKED: ',0
+msg1 db 'Input a number or set of characters: ',13,10,0
+msg2 db 'You have inputed: ',0
 msg3 db ' ',13,10,0
 
 
