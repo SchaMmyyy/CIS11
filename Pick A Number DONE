@@ -1,0 +1,46 @@
+.686
+.MODEL flat, STDCALL
+OPTION casemap:none
+
+	include \masm32\include\masm32.inc
+    include \masm32\include\user32.inc
+    include \masm32\include\kernel32.inc
+	includelib \masm32\lib\masm32.lib
+    includelib \masm32\lib\user32.lib
+    includelib \masm32\lib\kernel32.lib
+
+
+
+NumberOfNumbers =0 ; Number of random numbers to be generated and shown
+;RangeOfNumbers = 6   ; Range of the random numbers (0..RangeOfNumbers-1)
+
+.DATA 
+msg1 db 'PICK A CHARACTER: ',13,10,0
+msg2 db 'YOU PICKED: ',0
+msg3 db ' ',13,10,0
+
+
+.DATA? 
+
+RangeOfNumbers db 100 dup(?)
+
+
+
+
+
+.CODE
+
+start:
+invoke StdOut,ADDR msg1
+invoke StdIn,ADDR RangeOfNumbers,100 ; receive text input
+invoke StdOut,ADDR msg2
+invoke StdOut,ADDR RangeOfNumbers 
+invoke StdOut,ADDR msg3
+
+invoke ExitProcess,0
+
+
+
+
+
+END start
