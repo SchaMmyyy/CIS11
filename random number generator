@@ -11,18 +11,29 @@ OPTION casemap:none
     includelib \masm32\lib\kernel32.lib
 
 
+;NumberOfNumbers = 10   ; Number of random numbers to be generated and shown
+RangeOfNumbers = 3     ; Range of the random numbers (0..RangeOfNumbers-1)
 
-NumberOfNumbers = 10   ; Number of random numbers to be generated and shown
-RangeOfNumbers = 6     ; Range of the random numbers (0..RangeOfNumbers-1)
+.DATA
+msg1 db 'Please type the number of six sided dice you would like to roll',13,10,0
+
+.DATA?
+NumberOfNumbers db 100 dup(?)
+
+
 
 .CODE
 
 start:
+
+invoke StdOut, ADDR msg1
+invoke StdIn, ADDR NumberOfNumbers, 100
+
 main PROC
     rdtsc
     invoke nseed, eax                   ; Initialize nrandom_seed
 
-    mov ecx, NumberOfNumbers            ; Loop counter - show ECX random numbers
+    movzx ecx, NumberOfNumbers            ; Loop counter - show ECX random numbers
     LL1:
     push ecx                            ; Preserve loop counter
 
