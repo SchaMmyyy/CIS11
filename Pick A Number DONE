@@ -9,11 +9,6 @@ OPTION casemap:none
     includelib \masm32\lib\user32.lib
     includelib \masm32\lib\kernel32.lib
 
-
-
-NumberOfNumbers =0 ; Number of random numbers to be generated and shown
-;RangeOfNumbers = 6   ; Range of the random numbers (0..RangeOfNumbers-1)
-
 .DATA 
 msg1 db 'Input a number or set of characters: ',13,10,0
 msg2 db 'You have inputed: ',0
@@ -23,9 +18,6 @@ msg3 db ' ',13,10,0
 .DATA? 
 
 RangeOfNumbers db 100 dup(?)
-
-
-
 
 
 .CODE
@@ -38,8 +30,6 @@ invoke StdOut,ADDR RangeOfNumbers
 invoke StdOut,ADDR msg3
 
 invoke ExitProcess,0
-
-
 
 
 
