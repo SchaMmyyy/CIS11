@@ -3,45 +3,44 @@
 OPTION casemap:none
 
 	include \masm32\include\masm32.inc
-    include \masm32\include\user32.inc
-    include \masm32\include\kernel32.inc
+    	include \masm32\include\user32.inc
+    	include \masm32\include\kernel32.inc
 	includelib \masm32\lib\masm32.lib
-    includelib \masm32\lib\user32.lib
-    includelib \masm32\lib\kernel32.lib
+    	includelib \masm32\lib\user32.lib
+    	includelib \masm32\lib\kernel32.lib
 
 
 
-NumberOfNumbers = 1   ; Number of random numbers to be generated and shown
-RangeOfNumbers = 21     ; Range of the random numbers (0..RangeOfNumbers-1)
-
+NumberOfNumbers = 2   ; Number of random numbers to be generated and shown
+RangeOfNumbers = 21     ; Range of the random numbers
 
 .DATA
-msg1 db 'Press ENTER to roll the 20-sided die! ',13,10,0
+msg1 db 'Press ENTER to roll two 20-sided die! ',13,10,0  ;display box for 20 sided dice
 
 
 .DATA? 
-slowdown db 100 dup(?)
+slowdown db 100 dup(?) 			;empty varibale used to pause code for user convenience 
 
 
 .CODE
 
 start:
 
-invoke StdOut, ADDR msg1
-invoke StdIn, ADDR slowdown, 100
+invoke StdOut, ADDR msg1   			;INVOKE message one above from line 19 
+invoke StdIn, ADDR slowdown, 100		;fills in empty variable that slows down code to allow user to anticipate rolled die 
 
 
 main PROC
     rdtsc
-    invoke nseed, eax                   ; Initialize nrandom_seed
+    invoke nseed, eax                   ; Initialize random seed
 
-    mov ecx, NumberOfNumbers            ; Loop counter - show ECX random numbers
+    mov ecx, NumberOfNumbers            ; shows ECX random numbers
     LL1:
     push ecx                            ; Preserve loop counter
 
-    invoke nrandom, RangeOfNumbers      ; Range (0..RangeOfNumbers-1)
+    invoke nrandom, RangeOfNumbers      ; invokes a random but also within its limits
 
-    call write_number                   ; printf ("%u ", EAX)
+    call write_number                   ; input a number
 
     pop ecx                             ; Restore loop counter
     loop LL1
@@ -49,14 +48,14 @@ main PROC
     invoke ExitProcess, 0
 main ENDP
 
-write_number PROC STDCALL USES ebx      ; printf ("%u ", EAX)
+write_number PROC STDCALL USES ebx      ; keeps the write number prompt
 LOCAL numstring[12]:BYTE, NumberOfBytesWritten:DWORD
 .CONST
     fmt db "%u ",0
 .CODE
     invoke wsprintf, ADDR numstring, ADDR fmt, eax
-    mov ebx, eax                        ; Preserve result - count of written bytes
-    invoke GetStdHandle, -11            ; Get STD_OUTPUT_HANDLE
+    mov ebx, eax                        ; keeps the value, preseres
+    invoke GetStdHandle, -11            ; Get STD handle
     mov edx, eax                        ; EAX will be used by the following INVOKE
     invoke WriteFile, edx, ADDR numstring, ebx, ADDR NumberOfBytesWritten, 0
     ret
