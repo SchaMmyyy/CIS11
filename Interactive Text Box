@@ -47,5 +47,4 @@ main endp
  ret 
  show_text endp  ;end of show text program 
 
-
  end start
