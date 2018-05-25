@@ -19,7 +19,8 @@ RangeOfNumbers = 21     ; Range of the random numbers (0..RangeOfNumbers-1)
 msg1 db 'Press ENTER to roll the 20-sided die! ',13,10,0
 
 
-
+.DATA? 
+slowdown db 100 dup(?)
 
 
 .CODE
@@ -27,6 +28,8 @@ msg1 db 'Press ENTER to roll the 20-sided die! ',13,10,0
 start:
 
 invoke StdOut, ADDR msg1
+invoke StdIn, ADDR slowdown, 100
+
 
 main PROC
     rdtsc
