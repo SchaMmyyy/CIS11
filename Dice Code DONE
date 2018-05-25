@@ -26,7 +26,7 @@ slowdown db 100 dup(?) 			;empty varibale used to pause code for user convenienc
 
 start:
 
-invoke StdOut, ADDR msg1   			;INVOKE message one above from line 19 
+invoke StdOut, ADDR msg1   			;INVOKE message one above from line 18 
 invoke StdIn, ADDR slowdown, 100		;fills in empty variable that slows down code to allow user to anticipate rolled die 
 
 
@@ -54,8 +54,8 @@ LOCAL numstring[12]:BYTE, NumberOfBytesWritten:DWORD
     fmt db "%u ",0
 .CODE
     invoke wsprintf, ADDR numstring, ADDR fmt, eax
-    mov ebx, eax                        ; keeps the value, preseres
-    invoke GetStdHandle, -11            ; Get STD handle
+    mov ebx, eax                        ; keeps the value
+    invoke GetStdHandle, -11            
     mov edx, eax                        ; EAX will be used by the following INVOKE
     invoke WriteFile, edx, ADDR numstring, ebx, ADDR NumberOfBytesWritten, 0
     ret
