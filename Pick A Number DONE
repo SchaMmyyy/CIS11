@@ -2,35 +2,41 @@
 .MODEL flat, STDCALL
 OPTION casemap:none
 
-	include \masm32\include\masm32.inc
+	include \masm32\include\masm32.inc    ; ALL MASM32 LIBRARY CALLS FOR CODE TO RUN 
     include \masm32\include\user32.inc
     include \masm32\include\kernel32.inc
 	includelib \masm32\lib\masm32.lib
     includelib \masm32\lib\user32.lib
     includelib \masm32\lib\kernel32.lib
 
+
 .DATA 
-msg1 db 'Input a number or set of characters: ',13,10,0
+msg1 db 'Input a number or set of characters: ',13,10,0       ;these are all the display boxes that the user can see! 
 msg2 db 'You have inputed: ',0
 msg3 db ' ',13,10,0
 
 
 .DATA? 
 
-RangeOfNumbers db 100 dup(?)
+RangeOfNumbers db 100 dup(?)				;belongs to the ".DATA?" that allocates room for text to be inputted
+
+
+
 
 
 .CODE
 
 start:
-invoke StdOut,ADDR msg1
-invoke StdIn,ADDR RangeOfNumbers,100 ; receive text input
-invoke StdOut,ADDR msg2
-invoke StdOut,ADDR RangeOfNumbers 
-invoke StdOut,ADDR msg3
+invoke StdOut,ADDR msg1						;invoke to display message 1 
+invoke StdIn,ADDR RangeOfNumbers,100 				;invoke to allow user to Stand In or recieve text input for variable "RangeOfNumbers"
+invoke StdOut,ADDR msg2						;invoke to display message 2
+invoke StdOut,ADDR RangeOfNumbers				;invoke to display what user inputted above from line 31
+invoke StdOut,ADDR msg3						;empty textbox to fill up line below and make a space 
 
-invoke ExitProcess,0
+invoke ExitProcess,0						;exits process for all invoke's entirely 
 
 
 
-END start
+
+
+END start																;CODE END 
