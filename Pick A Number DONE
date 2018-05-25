@@ -3,11 +3,11 @@
 OPTION casemap:none
 
 	include \masm32\include\masm32.inc    ; ALL MASM32 LIBRARY CALLS FOR CODE TO RUN 
-    include \masm32\include\user32.inc
-    include \masm32\include\kernel32.inc
+    	include \masm32\include\user32.inc
+   	include \masm32\include\kernel32.inc
 	includelib \masm32\lib\masm32.lib
-    includelib \masm32\lib\user32.lib
-    includelib \masm32\lib\kernel32.lib
+    	includelib \masm32\lib\user32.lib
+    	includelib \masm32\lib\kernel32.lib
 
 
 .DATA 
@@ -34,7 +34,6 @@ invoke StdOut,ADDR RangeOfNumbers				;invoke to display what user inputted above
 invoke StdOut,ADDR msg3						;empty textbox to fill up line below and make a space 
 
 invoke ExitProcess,0						;exits process for all invoke's entirely 
-
 
 
 
